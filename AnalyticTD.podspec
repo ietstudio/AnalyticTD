@@ -20,11 +20,11 @@ Pod::Spec.new do |s|
   AnalyticTD..
                        DESC
 
-  s.homepage         = "http://www.baidu.com"
+  s.homepage         = "https://github.com/ietstudio/AnalyticTD"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "gaoyang" => "geekgaoyang@gmail.com" }
-  s.source           = { :git => "ssh://git@192.168.1.168/home/git/WorkSpace/shared-plugins/plugin-ios/AnalyticTD", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/ietstudio/AnalyticTD.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
