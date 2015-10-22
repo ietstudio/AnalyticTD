@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D072E1F37B563D40169D6560"
+               BlueprintIdentifier = "24F133746D5DC9096243E686"
                BuildableName = "AnalyticTD.framework"
                BlueprintName = "AnalyticTD"
                ReferencedContainer = "container:Pods.xcodeproj">
