@@ -1,0 +1,41 @@
+{
+  "name": "AnalyticTD",
+  "version": "0.1.0",
+  "summary": "AnalyticTD.",
+  "description": "AnalyticTD..",
+  "homepage": "http://www.baidu.com",
+  "license": "MIT",
+  "authors": {
+    "gaoyang": "geekgaoyang@gmail.com"
+  },
+  "source": {
+    "git": "ssh://git@192.168.1.168/home/git/WorkSpace/shared-plugins/plugin-ios/AnalyticTD",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": [
+    "Pod/Classes/**/*",
+    "Pod/SDK/Game_Analytics_SDK_IOS_3.1.60/*.h"
+  ],
+  "resource_bundles": {
+    "AnalyticTD": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "vendored_libraries": "Pod/SDK/Game_Analytics_SDK_IOS_3.1.60/libTalkingDataGA.a",
+  "frameworks": [
+    "CoreTelephony",
+    "AdSupport",
+    "Security",
+    "SystemConfiguration"
+  ],
+  "libraries": "z",
+  "dependencies": {
+    "GamePluginBase": [
+      "~> 0.1.0"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+source 'https://github.com/ietstudio/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'AnalyticTD_Example', :exclusive => true do
+  pod "AnalyticTD", :path => "../"
+end
+
+target 'AnalyticTD_Tests', :exclusive => true do
+  pod "AnalyticTD", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end
