@@ -1,6 +1,0 @@
-framework module Pods_AnalyticTD_Tests {
-  umbrella header "Pods-AnalyticTD_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}

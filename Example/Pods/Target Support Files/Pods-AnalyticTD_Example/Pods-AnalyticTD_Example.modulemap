@@ -1,6 +1,0 @@
-framework module Pods_AnalyticTD_Example {
-  umbrella header "Pods-AnalyticTD_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

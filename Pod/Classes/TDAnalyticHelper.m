@@ -7,13 +7,11 @@
 //
 
 #import "TDAnalyticHelper.h"
+#import <CoreLocation/CoreLocation.h>
 #import "SystemUtil.h"
 #import "TalkingDataGA.h"
 
 @implementation TDAnalyticHelper
-{
-    TDGAAccount *_account;
-}
 
 SINGLETON_DEFINITION(TDAnalyticHelper)
 
@@ -22,22 +20,23 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 #pragma mark - public method
 
 - (void)setAccoutInfo:(NSDictionary *)dict {
+    TDGAAccount* account = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
     NSString* accountName = [dict objectForKey:@"userId"];
     NSString* gender = [dict objectForKey:@"gender"];
     NSString* age = [dict objectForKey:@"age"];
-    [_account setAccountType:kAccountRegistered];
+    [account setAccountType:kAccountRegistered];
     if (accountName != nil) {
-        [_account setAccountName:accountName];
+        [account setAccountName:accountName];
     }
     if (gender != nil) {
         if ([gender isEqualToString:@"male"]) {
-            [_account setGender:kGenderMale];
+            [account setGender:kGenderMale];
         } else if ([gender isEqualToString:@"female"]) {
-            [_account setGender:kGenderFemale];
+            [account setGender:kGenderFemale];
         }
     }
     if (age != nil) {
-        [_account setAge:[age intValue]];
+        [account setAge:[age intValue]];
     }
 }
 
@@ -46,12 +45,17 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 }
 
 - (void)onEvent:(NSString *)eventId Label:(NSString *)label {
-    NSDictionary* dict = [NSDictionary dictionaryWithObject:label forKey:@"key"];
-    [TalkingDataGA onEvent:eventId eventData:dict];
+    NSDictionary* userInfo = [NSDictionary dictionaryWithObject:label forKey:@"key"];
+    [self onEvent:eventId eventData:userInfo];
+}
+
+- (void)onEvent:(NSString *)eventId eventData:(NSDictionary *)userInfo {
+    [TalkingDataGA onEvent:eventId eventData:userInfo];
 }
 
 - (void)setLevel:(int)level {
-    [_account setLevel:level];
+    TDGAAccount* account = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
+    [account setLevel:level];
 }
 
 - (void)charge:(NSString *)name :(double)cash :(double)coin :(int)type {
@@ -83,11 +87,14 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 #pragma mark - LifeCycleDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    _account = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
-    [_account setAccountType:kAccountAnonymous];
     NSString *key = [[SystemUtil getInstance] getConfigValueWithKey:TALKINGDATA_KEY];
     NSString *channel = [[SystemUtil getInstance] getConfigValueWithKey:TALKINGDATA_CHANNAL];
     [TalkingDataGA onStart:key withChannelId:channel];
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+    [locationManager startUpdatingLocation];
+    CLLocation *location = locationManager.location;
+    [TalkingDataGA setLatitude:location.coordinate.latitude
+                     longitude:location.coordinate.longitude];
     return YES;
 }
 
