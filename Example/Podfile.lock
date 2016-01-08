@@ -1,5 +1,5 @@
 PODS:
-  - AnalyticTD (0.1.0):
+  - AnalyticTD (0.1.1):
     - GamePluginBase (~> 0.1.0)
   - Expecta (1.0.5)
   - Expecta+Snapshots (2.0.0):
@@ -25,7 +25,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AnalyticTD: 453edb43aa7eca3e606421418ccda023fb06b0cc
+  AnalyticTD: fa979933490a0d61ab3e5dd8ae134c397ae012e8
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
