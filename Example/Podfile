@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AnalyticTD_Example' do
+  pod 'AnalyticTD', :path => '../'
+
+  target 'AnalyticTD_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
