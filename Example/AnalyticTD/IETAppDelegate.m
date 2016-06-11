@@ -7,12 +7,32 @@
 //
 
 #import "IETAppDelegate.h"
+#import "IOSSystemUtil.h"
+#import "TDAnalyticHelper.h"
 
 @implementation IETAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    self.window.rootViewController=[storyboard instantiateInitialViewController];
+    [self.window makeKeyAndVisible];
+    
+    [[IOSSystemUtil getInstance] setWindow:self.window];
+    [[IOSSystemUtil getInstance] setController:self.window.rootViewController];
+    [[TDAnalyticHelper getInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    if ([application respondsToSelector: @selector(isRegisteredForRemoteNotifications)]) {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings: [UIUserNotificationSettings settingsForTypes:
+                                                        UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |
+                                                        UIRemoteNotificationTypeAlert categories:nil]];
+        [application registerForRemoteNotifications];
+    } else {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];
+    }
     return YES;
 }
 
@@ -36,11 +56,20 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[TDAnalyticHelper getInstance] applicationDidBecomeActive:application];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[TDAnalyticHelper getInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [[TDAnalyticHelper getInstance] application:application didReceiveRemoteNotification:userInfo];
 }
 
 @end
