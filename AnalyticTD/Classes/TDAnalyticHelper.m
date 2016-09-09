@@ -20,12 +20,21 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 #pragma mark - public method
 
 - (void)setAccoutInfo:(NSDictionary *)dict {
-    TDGAAccount* account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
-    NSString* accountName = [dict objectForKey:@"userId"];
+    NSString* userId      = [dict objectForKey:@"userId"];
+    NSString* accountName = [dict objectForKey:@"accountName"];
     NSString* gender      = [dict objectForKey:@"gender"];
     NSString* age         = [dict objectForKey:@"age"];
     NSString* gameserver  = [dict objectForKey:@"gameserver"];
-    [account setAccountType:kAccountRegistered];
+    
+    TDGAAccount* account;
+    if (userId == nil) {
+        account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
+        [account setAccountType:kAccountAnonymous];
+    } else {
+        account  = [TDGAAccount setAccount:userId];
+        [account setAccountType:kAccountRegistered];
+    }
+    
     if (accountName != nil) {
         [account setAccountName:accountName];
     }
