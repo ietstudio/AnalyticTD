@@ -11,7 +11,9 @@
 #import "IOSSystemUtil.h"
 #import "TalkingDataGA.h"
 
-@implementation TDAnalyticHelper
+@implementation TDAnalyticHelper {
+    NSString* _userId;
+}
 
 SINGLETON_DEFINITION(TDAnalyticHelper)
 
@@ -26,13 +28,13 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
     NSString* age         = [dict objectForKey:@"age"];
     NSString* gameserver  = [dict objectForKey:@"gameserver"];
     
+    _userId = userId;
+    
     TDGAAccount* account;
     if (userId == nil) {
         account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
-        [account setAccountType:kAccountAnonymous];
     } else {
         account  = [TDGAAccount setAccount:userId];
-        [account setAccountType:kAccountRegistered];
     }
     
     if (accountName != nil) {
@@ -67,7 +69,12 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 }
 
 - (void)setLevel:(int)level {
-    TDGAAccount* account = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
+    TDGAAccount* account;
+    if (_userId == nil) {
+        account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
+    } else {
+        account  = [TDGAAccount setAccount:_userId];
+    }
     [account setLevel:level];
 }
 
