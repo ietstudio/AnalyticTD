@@ -32,6 +32,7 @@
     [dict setObject:@"0000001" forKey:@"userId"];
     [dict setObject:@"male" forKey:@"gender"];
     [dict setObject:@"15" forKey:@"age"];
+    [dict setObject:@"nickname" forKey:@"accountName"];
     [[TDAnalyticHelper getInstance] setAccoutInfo:dict];
 }
 - (IBAction)onEvent1:(id)sender {

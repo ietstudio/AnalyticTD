@@ -23,19 +23,18 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 
 - (void)setAccoutInfo:(NSDictionary *)dict {
     NSString* userId      = [dict objectForKey:@"userId"];
-    NSString* accountName = [dict objectForKey:@"accountName"];
     NSString* gender      = [dict objectForKey:@"gender"];
     NSString* age         = [dict objectForKey:@"age"];
+    NSString* accountName = [dict objectForKey:@"accountName"];
     NSString* gameserver  = [dict objectForKey:@"gameserver"];
     
-    _userId = userId;
-    
-    TDGAAccount* account;
     if (userId == nil) {
-        account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
-    } else {
-        account  = [TDGAAccount setAccount:userId];
+        return;
     }
+
+    _userId = userId;
+
+    TDGAAccount* account = [TDGAAccount setAccount:userId];
     
     if (accountName != nil) {
         [account setAccountName:accountName];
@@ -71,11 +70,9 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 - (void)setLevel:(int)level {
     TDGAAccount* account;
     if (_userId == nil) {
-        account  = [TDGAAccount setAccount:[TalkingDataGA getDeviceId]];
-    } else {
-        account  = [TDGAAccount setAccount:_userId];
+        return;
     }
-    [account setLevel:level];
+    [[TDGAAccount setAccount:_userId] setLevel:level];
 }
 
 - (void)charge:(NSString *)name :(double)cash :(double)coin :(int)type {
