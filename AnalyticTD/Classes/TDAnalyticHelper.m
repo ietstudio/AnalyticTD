@@ -124,24 +124,11 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
     CLLocation *location = locationManager.location;
     [TalkingDataGA setLatitude:location.coordinate.latitude
                      longitude:location.coordinate.longitude];
-    if ([TalkingDataGA handleTDGAPushMessage:launchOptions]) {
-//        [[IOSSystemUtil getInstance] showMessage:@"launch"];
-    }
     return YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [TalkingDataGA setDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    if ([TalkingDataGA handleTDGAPushMessage:userInfo]) {
-//        [[IOSSystemUtil getInstance] showMessage:@"running"];
-    }
 }
 
 @end

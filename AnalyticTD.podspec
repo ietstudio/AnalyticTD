@@ -30,8 +30,6 @@ AnalyticTD.
 
   s.ios.deployment_target = '7.0'
 
-  s.source_files = 'AnalyticTD/Classes/**/*'
-  
   # s.resource_bundles = {
   #   'AnalyticTD' => ['AnalyticTD/Assets/*.png']
   # }
@@ -39,6 +37,10 @@ AnalyticTD.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'TalkingData-GameAnalytics', '~> 3.2.5'
   s.dependency 'GamePluginBase'
+
+  s.source_files = 'AnalyticTD/Classes/**/*', 'AnalyticTD/SDK/SaaS_GameAnalytics_iOS_SDK_V4.0.12/*.h'
+  s.vendored_libraries = 'AnalyticTD/SDK/SaaS_GameAnalytics_iOS_SDK_V4.0.12/libTalkingDataGA.a'
+  s.frameworks = 'AdSupport', 'CoreTelephony', 'Security', 'SystemConfiguration'
+  s.libraries = 'z'
 end

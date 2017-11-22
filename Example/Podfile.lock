@@ -1,7 +1,6 @@
 PODS:
-  - AnalyticTD (0.1.2):
+  - AnalyticTD (0.1.5):
     - GamePluginBase
-    - TalkingData-GameAnalytics (~> 3.2.5)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -23,23 +22,21 @@ PODS:
     - Reachability (~> 3.2)
   - MBProgressHUD (0.9.2)
   - Reachability (3.2)
-  - TalkingData-GameAnalytics (3.2.5)
 
 DEPENDENCIES:
   - AnalyticTD (from `../`)
 
 EXTERNAL SOURCES:
   AnalyticTD:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  AnalyticTD: f87b2d2aa7e3f0abacaa9fa7e1229afa307912d3
+  AnalyticTD: 1dc40569850bba1f86ea6f4490febff1ea6c262a
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   GamePluginBase: f154df85a4134b2165697728bdab164aaf8681d0
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  TalkingData-GameAnalytics: a9ec66ca65288339c9dd0415ed47e0db186cbf3e
 
-PODFILE CHECKSUM: 9e6b245ab24fadda1be91d941e0b91d3fee8a712
+PODFILE CHECKSUM: 7a973f1ca2107dd3c7cf5146013ac3766560c012
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.1
