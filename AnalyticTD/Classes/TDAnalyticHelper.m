@@ -68,7 +68,6 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 }
 
 - (void)setLevel:(int)level {
-    TDGAAccount* account;
     if (_userId == nil) {
         return;
     }
@@ -86,7 +85,9 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
                            currencyType:@"CNY"
                   virtualCurrencyAmount:coin
                             paymentType:[NSString stringWithFormat:@"%d", type]];
-    [TDGAVirtualCurrency onChargeSuccess:orderId];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TDGAVirtualCurrency onChargeSuccess:orderId];
+    });
 }
 
 - (void)reward:(double)coin :(int)type {
@@ -111,6 +112,10 @@ SINGLETON_DEFINITION(TDAnalyticHelper)
 
 - (void)missionFailed:(NSString *)missionId because:(NSString *)reason {
     [TDGAMission onFailed:missionId failedCause:reason];
+}
+
+- (NSString *)getName {
+    return @"Talkingdata";
 }
 
 #pragma mark - LifeCycleDelegate
